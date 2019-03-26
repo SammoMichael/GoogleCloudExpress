@@ -30,7 +30,7 @@ state = {
     return (
       <div className="App">
         <Speed props={this.state.data}/>
-        <img src={logo} className="App-logo" alt="logo" />
+        {/* <img src={logo} className="App-logo" alt="logo" /> */}
       </div>
     );
   }

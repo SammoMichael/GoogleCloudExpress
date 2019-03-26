@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Timer from '../timer/Timer'
 export class Speed extends Component {
     constructor(props) {
       super(props);
@@ -7,12 +7,18 @@ export class Speed extends Component {
       this.handleKeyDown = this.handleKeyDown.bind(this);
     }
     componentDidMount() {
+
+      var today = new Date();
+      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      this.setState({time})
       // const props = this.props.props
       // props ? this.setState({props}) : this.setState({props: ""})
       // this.setState({ prompt: this.props.props, length: this.props.props.length })
       
     }
-    handleKeyDown(e) {;
+    handleKeyDown(e) {
+      e.preventDefault()
+      console.log(e.key)
       // debugger
       let prompt = this.state.prompt;
       let new_state = this.state.new_state
@@ -24,7 +30,21 @@ export class Speed extends Component {
           this.setState({ new_state, prompt })
           // console.log(this.state)
           this.setState({ index: new_index })
-      } else if(e.key.length > 1) {
+        } else if(e.key === 'Tab') {
+          if (this.props.props[this.state.index] === " " && this.props.props[this.state.index + 1] === " ") {
+            new_state = new_state.concat("  ")
+            this.setState({ new_state, prompt })
+            // console.log(this.state)
+          this.setState({ index: this.state.index+2, length })
+            }
+      } else if(e.key === 'Enter') {
+        if (this.props.props[this.state.index].charCodeAt() === 10) {
+            new_state = new_state.concat("↵")
+            this.setState({ new_state, prompt })
+            // console.log(this.state)
+          this.setState({ index: this.state.index+1, length })
+            }
+      } else if(e.key.length > 1 ) {
       } else {
             if (this.props.props[this.state.index] === e.key) {
             new_state = new_state.concat(e.key)
@@ -45,7 +65,7 @@ export class Speed extends Component {
         var innerHTML = this.props.props.substring(0, index) + "<span class='highlight'>" + this.props.props.substring(index, index + len) + "</span>" + this.props.props.substring(index + len);
         highlighter.innerHTML = innerHTML;
         console.log(innerHTML);
-        debugger
+        // debugger
       
     }
     render() {
@@ -61,7 +81,8 @@ export class Speed extends Component {
             {prompt}
           </div>
           <div>
-            {new_state}
+            {/* {new_state} */}
+            < Timer />
           </div>
           {/* <span className="prompt">{prompt}</span> */}
           {/* <span className="prompt">{new_state}</span> */}
