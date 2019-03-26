@@ -4,8 +4,9 @@ var Prism = require('prismjs');
 export class Speed extends Component {
     constructor(props) {
       super(props);
-      this.state={ highlight: "highlight",prompt: prompt, innerHTML: '', new_state: '', index: 0, length: 0, errors: 0, __html: ''}
+      this.state={ over: false, highlight: "highlight",prompt: prompt, innerHTML: '', new_state: '', index: 0, length: 0, errors: 0, __html: ''}
       this.handleKeyDown = this.handleKeyDown.bind(this);
+      this.gameOver = this.gameOver.bind(this)
     }
     componentDidMount() {
       
@@ -17,6 +18,14 @@ export class Speed extends Component {
       // this.setState({ prompt: this.props.props, length: this.props.props.length })
       
     }
+    gameOver() {
+      this.setState({over: false})
+    }
+    // componentDidUpdate() {
+    //   if (this.state.index >= this.state.length && this.state.length !== 0) {
+    //     this.gameOver();
+    //   }
+    // }
     handleKeyDown(e) {
       e.preventDefault()
       console.log(e.key)
@@ -88,7 +97,8 @@ export class Speed extends Component {
         html = Prism.highlight(code, Prism.languages.javascript, 'javascript');
         markdown = {__html: html}
       } else markdown = {__html: ''}
-
+      var index = this.state.index
+      var length = this.state.length
       const new_state = (this.state.new_state)
       const char_count = new_state.length
       var word_count = this.state.new_state.split(' ')
@@ -107,10 +117,11 @@ export class Speed extends Component {
                 {/* {new_state} */}
                 {/* {word_count} */}
                 {/* {char_count} */}
-                < Timer />
+                {<Timer /> }
                 <div className="errors">
                   Errors: { errors } <br></br>
                   WPM: { wpm }
+                  { index >= length && length !== 0 ? "You Won!!!" : null }
                   {/* <pre><code dangerouslySetInnerHTML={markdown}></code></pre> */}
                 </div>
               </div>

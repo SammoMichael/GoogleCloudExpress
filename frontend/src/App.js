@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Repl from './components/repl/Repl';
 import Speed from './components/speed/speed';
 class App extends Component {
 state = {
@@ -29,7 +30,8 @@ state = {
     console.log(this.state.data)
     return (
       <div className="App">
-        <Speed props={this.state.data}/>
+        {/* <Repl /> */}
+        {this.state.data ? <Speed props={this.state.data}/> : "Loading..."}
         {/* <img src={logo} className="App-logo" alt="logo" /> */}
       </div>
     );

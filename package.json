@@ -1,5 +1,5 @@
 {
-  "name": "googlecloudexpress",
+  "name": "6figures",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,8 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "mongodb": "^3.2.2",
+    "mongoose": "^5.4.20",
     "nodemon": "^1.18.10",
-    "prismjs": "^1.16.0"
+    "prismjs": "^1.16.0",
+    "repl": "^0.1.3"
   }
 }

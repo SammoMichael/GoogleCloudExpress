@@ -68,7 +68,10 @@ html, body {
   color: yellow;
 }
 .timer {
-  min-height: 40px;
+  height: 40px;
+  width: 80px;
+  padding: 10px;
+  border-radius: 20px;
   background-color: red;
   color: white;
   margin: 150px;
