@@ -1,14 +1,86 @@
+/* <span class="token keyword">function</span><span class="token function">binarySearch</span><span class="token punctuation">(</span><span class="token parameter">ar<span class="token punctuation">, </span> el<span class="token punctuation">, </span> compare_fn</span><span class="token punctuation">)</span><span class="token punctuation"> {
+  </span><span class="token keyword">var</span>m <span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;
+  </span><span class="token keyword">var</span>n <span class="token operator">=</span>ar<span class="token punctuation">.</span>length <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;
+  </span><span class="token keyword">while</span><span class="token punctuation">(</span>m <span class="token operator">&lt;
+
+  =</span> n<span class="token punctuation">)</span><span class="token punctuation"> {
+    </span><span class="token keyword">var</span>k <span class="token operator">=</span><span class="token punctuation">(</span>n <span class="token operator">+</span> m<span class="token punctuation">)</span><span class="token operator">>></span><span class="token number">1</span><span class="token punctuation">;
+    </span><span class="token keyword">var</span>cmp <span class="token operator">=</span><span class="token function">compare_fn</span><span class="token punctuation">(</span>el<span class="token punctuation">, </span> ar<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;
+
+    </span><span class="token keyword">if</span><span class="token punctuation">(</span>cmp <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation"> {
+      </span>m <span class="token operator">=</span>k <span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;
+      </span><span class="token punctuation">
+    }
+
+    </span><span class="token keyword">else</span><span class="token keyword">if</span><span class="token punctuation">(</span>cmp <span class="token operator">&lt;
+
+    </span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation"> {
+      </span>n <span class="token operator">=</span>k <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;
+      </span><span class="token punctuation">
+    }
+
+    </span><span class="token keyword">else</span><span class="token punctuation"> {
+      </span><span class="token keyword">return</span>k<span class="token punctuation">;
+      </span><span class="token punctuation">
+    }
+
+    </span><span class="token punctuation">
+  }
+
+  </span><span class="token keyword">return</span><span class="token operator">-</span>m <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;
+  </span><span class="token punctuation">
+}
+
+</span><span class="token keyword">function</span><span class="token function">compare_number</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">, </span> b</span><span class="token punctuation">)</span><span class="token punctuation"> {
+  </span><span class="token keyword">return</span>a <span class="token operator">-</span>b<span class="token punctuation">;
+  </span><span class="token punctuation">
+} */
+
+/* </span> */
+
 html, body {
   height: 100vh;
   width: 100vw;
 }
 
+.speed {
+  min-width: 50px;
+  min-height: 50px;
+  /* margin: 50px; */
+  font-family: "Roboto";
+  font-size: 50px;
+  border-bottom: 10px solid aqua;
+}
+
+.feedback{
+  display: flex;
+  flex: 1;
+  flex-direction: column-reverse;
+  color: white;
+  background-color: #2d3436;
+  background-image: linear-gradient(315deg, #2d3436 0%, #000000 74%);
+  background-color: #166d3b;
+  background-image: linear-gradient(147deg, #166d3b 0%, #000000 74%);
+}
+.errors{ 
+  display: flex;
+  flex-direction: column;
+  color: yellow;
+}
 .timer {
-  height: 200px;
+  min-height: 40px;
   background-color: red;
   color: white;
+  margin: 150px;
 }
 .text {
+  margin-left: 50px;
+  margin-bottom: 50px;
+  letter-spacing: 3px;
+  overflow: scroll;
+  /* margin: 50px; */
+  display: flex;
+
   height: 100vh;
   width: 100vw;
   /* margin: 500px; */
@@ -17,13 +89,27 @@ html, body {
    text-align: left;
 
 }
+.parameter {
+  color: pink;
+}
 .highlight {
-  font-size: 20px;
-  background-color: aqua;
+  font-size: 30px;
+  background-color:rgb(40, 50, 180);
+  opacity: 1;
+  border: rgb(40, 50, 180) solid 5px;
+}
+.error {
+  font-size: 30px;
+  opacity: 1;
+  border: red solid 5px;
+  background-color: red;
 }
 
 .App {
-  background-color: black;
+  display: flex;    
+  flex-direction: column;
+  background-color: #2d3436;
+  background-image: linear-gradient(315deg, #2d3436 0%, #000000 74%);
   text-align: center;
   height: 100vh;
   width: 100vw;
@@ -35,7 +121,20 @@ html, body {
   height: 40vmin;
   pointer-events: none;
 }
+.punctuation {
+  color: green;
+}
 
+.operator {
+  color: purple;
+}
+.keyword {
+  color: red;
+}
+
+.function {
+  color: orange;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
