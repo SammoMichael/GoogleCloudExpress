@@ -12,12 +12,12 @@ state = {
   componentDidMount() {
       // Call our fetch function below once the component mounts
     this.callBackendAPI()
-      .then(res => this.setState({ data: res.express }))
+      .then(res => this.setState({ data: res.res }))
       .catch(err => console.log(err));
   }
     // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
   callBackendAPI = async () => {
-    const response = await fetch('/express_backend');
+    const response = await fetch('/ruby');
     const body = await response.json();
 
     if (response.status !== 200) {

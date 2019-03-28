@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import Timer from '../timer/Timer'
+import { Link } from 'react-router-dom';
 var Prism = require('prismjs');
+
 export class Speed extends Component {
     constructor(props) {
       super(props);
-      this.state={ over: false, highlight: "highlight",prompt: prompt, innerHTML: '', new_state: '', index: 0, length: 0, errors: 0, __html: ''}
+      this.state={ over: false, highlight: "highlight",prompt: prompt, innerHTML: '', new_state: '', index: 12, length: 0, errors: 0, __html: ''}
       this.handleKeyDown = this.handleKeyDown.bind(this);
       this.gameOver = this.gameOver.bind(this)
+      this.handleClick = this.handleClick.bind(this)
     }
     componentDidMount() {
       
@@ -18,6 +21,14 @@ export class Speed extends Component {
       // this.setState({ prompt: this.props.props, length: this.props.props.length })
       
     }
+    handleClick() {
+      const index = this.state.index
+      const len = this.state.length
+      this.setState({index: 12, over:false})
+      var innerHTML = this.props.props.substring(0, index) + `<span class=${this.state.highlight}>` + this.props.props.substring(index, index + len) + "</span>" + this.props.props.substring(index + len);
+      const highlighter = document.getElementsByClassName('highlighter')[0]
+      highlighter.innerHTML = innerHTML;
+    }
     gameOver() {
       this.setState({over: false})
     }
@@ -28,13 +39,17 @@ export class Speed extends Component {
     // }
     handleKeyDown(e) {
       e.preventDefault()
+      if (this.state.index === this.state.length -14) {
+        this.setState({over: true})
+        return 
+      }
       console.log(e.key)
       // debugger
       let prompt = this.state.prompt;
       let new_state = this.state.new_state
       let length = this.props.props.length || 0
       console.log(new_state);
-      if(e.key === 'Backspace') {
+      if(e.key === 'Backspace' && index > 13) {
           new_state = new_state.slice(0, -1);
           let new_index = this.state.index - 1 < 0 ? 0 : this.state.index - 1
           this.setState({ new_state, prompt })
@@ -108,23 +123,27 @@ export class Speed extends Component {
       wpm = (isNaN(wpm) ? 0 : wpm)
       return (
         <>
-          <div className="speed">Speed Code </div>
-            <div className="text">
-              <div className="highlighter">
-                {prompt}
-              </div>
-              <div className="timer-box">
+          < div className = "speed" > < Link to="/"> Speed Code </Link></div >
+            <div className="timer-box">
                 {/* {new_state} */}
                 {/* {word_count} */}
                 {/* {char_count} */}
-                {<Timer /> }
+                {this.state.over? null : <Timer /> }
                 <div className="errors">
                   Errors: { errors } <br></br>
                   WPM: { wpm }
-                  { index >= length && length !== 0 ? "You Won!!!" : null }
+                  <br></br>
+                  { this.state.over ?  "You Won!!!" : null }
+                  { this.state.over ? <button className="replay-button" onClick={this.handleClick}>Replay</button>: null}
                   {/* <pre><code dangerouslySetInnerHTML={markdown}></code></pre> */}
                 </div>
               </div>
+            
+            
+            <div className="text">
+              <div className="highlighter">
+                  <div dangerouslySetInnerHTML={{ __html: prompt }}/></div>
+              
               {/* <span className="prompt">{prompt}</span> */}
               {/* <span className="prompt">{new_state}</span> */}
             </div>
