@@ -22,7 +22,6 @@ app.use(express.static(path.join(__dirname, 'client')));
 
 client.connect(err => {
   const collection = client.db("6figures").collection("prompts");
-  console.log(collection, client)
   const server = app.listen(process.env.PORT || 8080, () => {
     const host = server.address().address;
     const port = server.address().port;
@@ -32,7 +31,7 @@ client.connect(err => {
     if (err) throw err
     var data = result
     app.get('/ruby', (req, res) => {
-      const number = Math.round(Math.random() * 10)
+      const number = Math.ceil(Math.random() * 10)
       const key = "Ruby" + number
       var result = data.filter(el => Object.keys(el).includes(key))
       res.send({
@@ -40,19 +39,19 @@ client.connect(err => {
       });
     });
     app.get('/python', (req, res) => {
-      const number = Math.round(Math.random() * 10)
+      const number = Math.ceil(Math.random() * 10)
       const key = "Python" + number
       var result = data.filter(el => Object.keys(el).includes(key))
       res.send({
-        res: result.key
+        res: result[0][key]
       });
     });
-    app.get('/js', (req, res) => {
-      const number = Math.round(Math.random() * 10)
+    app.get('/javaScript', (req, res) => {
+      const number = Math.ceil(Math.random() * 10)
       const key = "JavaScript" + number
       var result = data.filter(el => Object.keys(el).includes(key))
       res.send({
-        res: result.key
+        res: result[0][key]
       });
     });
   })

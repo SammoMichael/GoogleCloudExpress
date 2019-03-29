@@ -63,12 +63,13 @@ html, body {
   background-image: linear-gradient(147deg, #166d3b 0%, #000000 74%);
 }
 .errors{ 
-  display: flex;
-  flex-direction: column;
-  color: yellow;
+  position: absolute;
+  right: 50px;
+  font-size: 30px;
+  margin-top: 10px;
 }
 .timer-box {
-  margin-top: 20px;
+  margin-top: 40px;
   position: sticky;
   align-items: center;
   display: flex;
@@ -109,11 +110,11 @@ html, body {
   opacity: 1;
   border: rgb(40, 50, 180) solid 5px;
 }
-.errors {
-  position: absolute;
-  right: 50px;
+.error {
   font-size: 30px;
-  margin-top: 10px;
+  background-color: red;
+  opacity: 1;
+  border:red solid 5px;
 }
 
 .App {

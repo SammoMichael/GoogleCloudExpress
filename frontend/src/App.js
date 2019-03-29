@@ -1,9 +1,12 @@
 
 import React, { Component } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
-import Repl from './components/repl/Repl';
+import { Link, Switch, Route } from 'react-router-dom';
+// import Repl from './components/repl/Repl';
 import Speed from './components/speed/speed';
+import Header from './components/layout/header/Header';
+
 class App extends Component {
 state = {
     data: null
@@ -25,13 +28,18 @@ state = {
     }
     return body;
   };
-
+  
   render() {
-    console.log(this.state.data)
     return (
       <div className="App">
+          < div className = "speed" > < Link to = "/" > Speed Code </Link></div >
+          
+        <Switch>
+  <Route exact path="/" component={Header} />
+  <Route path="/Speed/:lang" props={''} component={Speed} />
+</Switch>
         {/* <Repl /> */}
-        {this.state.data ? <Speed props={this.state.data}/> : "Loading..."}
+        {/* {this.state.data ? <Speed props={this.state.data}/> : "Loading..."} */}
         {/* <img src={logo} className="App-logo" alt="logo" /> */}
       </div>
     );

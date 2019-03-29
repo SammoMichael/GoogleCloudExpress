@@ -20,7 +20,6 @@ export default class Timer extends Component {
     return (
       <div className="timer">
         { time } 
-        {/* {console.log(JSON.stringify(this.state.timer))} */}
       </div>
     )
   }
