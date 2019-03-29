@@ -14,30 +14,29 @@ state = {
 
   componentDidMount() {
       // Call our fetch function below once the component mounts
-    this.callBackendAPI()
-      .then(res => this.setState({ data: res.res }))
-      .catch(err => console.log(err));
-  }
-    // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
-  callBackendAPI = async () => {
-    const response = await fetch('/ruby');
-    const body = await response.json();
+  //   this.callBackendAPI()
+  //     .then(res => this.setState({ data: res.res }))
+  //     .catch(err => console.log(err));
+  // }
+  //   // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
+  // callBackendAPI = async () => {
+  //   const response = await fetch('/ruby');
+  //   const body = await response.json();
 
-    if (response.status !== 200) {
-      throw Error(body.message) 
-    }
-    return body;
+  //   if (response.status !== 200) {
+  //     throw Error(body.message) 
+  //   }
+  //   return body;
   };
   
   render() {
     return (
       <div className="App">
-          < div className = "speed" > < Link to = "/" > Speed Code </Link></div >
-          
+          < div className = "speed" > < Link className="app-name" to = "/" > Speed Code </Link></div >
         <Switch>
-  <Route exact path="/" component={Header} />
-  <Route path="/Speed/:lang" props={''} component={Speed} />
-</Switch>
+          <Route exact path="/" component={Header} />
+          <Route path="/Speed/:lang" props={''} component={Speed} />
+        </Switch>
         {/* <Repl /> */}
         {/* {this.state.data ? <Speed props={this.state.data}/> : "Loading..."} */}
         {/* <img src={logo} className="App-logo" alt="logo" /> */}

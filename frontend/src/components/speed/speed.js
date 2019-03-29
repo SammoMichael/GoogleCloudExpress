@@ -5,7 +5,7 @@ import Timer from '../timer/Timer'
 export class Speed extends Component {
     constructor(props) {
       super(props);
-      this.state={ over: false, highlight: "highlight",prompt: prompt, innerHTML: '', new_state: '', index: 12, length: 0, errors: 0, __html: ''}
+      this.state={ body: '', over: false, highlight: "highlight",prompt: prompt, innerHTML: '', new_state: '', index: 12, length: 0, errors: 0, __html: ''}
       this.handleKeyDown = this.handleKeyDown.bind(this);
       this.gameOver = this.gameOver.bind(this)
       this.handleClick = this.handleClick.bind(this)
@@ -58,7 +58,8 @@ export class Speed extends Component {
       }
       let prompt = this.state.prompt;
       let new_state = this.state.new_state
-      let length = this.state.body.length || 0
+      
+      let length = this.state.body.length
       if(e.key === 'Backspace' && this.state.index > 13) {
           new_state = new_state.slice(0, -1);
           let new_index = this.state.index - 1 < 0 ? 0 : this.state.index - 1
@@ -106,8 +107,13 @@ export class Speed extends Component {
       //   html = Prism.highlight(code, Prism.languages.javascript, 'javascript');
       //   markdown = {__html: html}
       // } else markdown = {__html: ''}
-      var word_count = this.state.new_state.split(' ')
+      var replaced = this.state.new_state.replace('(', ' ')
+      replaced = replaced.replace('.', ' ')
+      replaced = replaced.replace('[', ' ')
+      replaced = replaced.replace('_', ' ')
+      var word_count = replaced.split(' ')
       word_count = word_count.filter(el => el !== "").length
+      console.log(word_count)
       var elapsed_minutes = (300 - window.time) / 60
       var wpm = Math.round(word_count / (elapsed_minutes))
       wpm = (isNaN(wpm) ? 0 : wpm)
@@ -124,7 +130,7 @@ export class Speed extends Component {
                   <br></br>
                   {/* <button className="next-button" onClick={this.handleNext}>Next</button> */}
                   { this.state.over ?  "You Won!!!" : null }
-                  { this.state.over ? <><button className="replay-button" onClick={this.handleClick}>Replay</button><button className="next-button" onClick={this.handleNext}>Next</button></> : null}
+                  { this.state.over || window.time <= 0 ? <><button className="replay-button" onClick={this.handleClick}>Replay</button><button className="next-button" onClick={this.handleNext}>Next</button></> : null}
                 </div>
               </div>
             <div className="text">
